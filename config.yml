@@ -1,5 +1,4 @@
 giphy:
-  api_key: "dc6zaTOxFJmzC"
   request_timeout: 10
 default:
   query: "Dependency Injector"

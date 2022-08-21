@@ -5,8 +5,8 @@ from unittest import mock
 import pytest
 from httpx import AsyncClient
 
-from giphynavigator.application import app
-from giphynavigator.giphy import GiphyClient
+from app.application import app
+from app.giphy import GiphyClient
 
 
 @pytest.fixture
