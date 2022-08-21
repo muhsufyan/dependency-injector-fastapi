@@ -2,23 +2,20 @@
 
 from dependency_injector import containers, providers
 
-from . import giphy, services
+from . import redis, services
 
 
 class Container(containers.DeclarativeContainer):
-    # gunakan module(package) endpoints yg kita buat
-    wiring_config = containers.WiringConfiguration(modules=[".endpoints"])
 
-    # gunakan environment variabel dlm format yaml
-    config = providers.Configuration(yaml_files=["config.yml"])
+    config = providers.Configuration()
 
-    giphy_client = providers.Factory(
-        giphy.GiphyClient,
-        api_key=config.giphy.api_key,
-        timeout=config.giphy.request_timeout,
+    redis_pool = providers.Resource(
+        redis.init_redis_pool,
+        host=config.redis_host,
+        password=config.redis_password,
     )
 
-    search_service = providers.Factory(
-        services.SearchService,
-        giphy_client=giphy_client,
+    service = providers.Factory(
+        services.Service,
+        redis=redis_pool,
     )

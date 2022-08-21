@@ -1,8 +1,10 @@
 dependency-injector
 fastapi
 uvicorn
-aiohttp
-httpx
-pyyaml
+aioredis<2  # TODO: Update example to work with aioredis >= 2.0
+
+# For testing:
+pytest
 pytest-asyncio
 pytest-cov
+httpx
